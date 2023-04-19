@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Pizzas</title>
+</head>
+<body>
+<div style="margin: 0 auto; width: max-content">
+    <div th:replace="header"></div>
+    <h2>List of Pizzas</h2>
+    <br>
+    <div>
+        <table border="1">
+            <tr>
+                <th>No.</th>
+                <th>Id</th>
+                <th>Pizza</th>
+                <th>Size</th>
+                <th>Price</th>
+                <!--            <th colspan="2">Operations</th>-->
+                <th>Operations</th>
+            </tr>
+            <tr th:each="pizza, iStat: ${pizzas}">
+                <td th:text="${iStat.index + 1}"/>
+                <td th:text="${pizza.id}"/>
+
+                <td th:text="${pizza.pizzaName}"/>
+                <td th:text="${pizza.size}"/>
+                <td th:text="${pizza.price}"/>
+
+                <!--            <td>-->
+                <!--                <a th:href="@{|pizza/${pizza.id}/update|}">Edit</a>-->
+                <!--            </td>-->
+                <td>
+                    <a th:href="@{|/pizza/${pizza.id}/delete|}">Remove</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <form action="#" th:action="@{/pizza/create}" th:object="${pizza}" method="post">
+            <div class="form-group">
+                <div>
+                    <label for="name">Pizza</label>
+                </div>
+                <div>
+                    <input type="text" th:field="*{pizzaName}" id="name" placeholder="Pizza">
+                    <span th:if="${#fields.hasErrors('pizzaName')}" th:errors="*{pizzaName}"></span>
+                </div>
+
+                <div>
+                    <label for="size">Size</label>
+                </div>
+                <div>
+                    <input type="number" th:field="*{size}" id="size" placeholder="Size">
+                    <span th:if="${#fields.hasErrors('size')}" th:errors="*{size}"></span>
+                </div>
+                <div>
+                    <label for="price">Price</label>
+                </div>
+                <div>
+                    <input type="number" th:field="*{price}" id="price">
+                    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Add Pizza">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

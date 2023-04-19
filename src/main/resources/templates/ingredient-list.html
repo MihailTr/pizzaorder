@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Ingredients</title>
+</head>
+<body>
+<div style="margin: 0 auto; width: max-content">
+    <div th:replace="header"></div>
+    <h2>List of Ingredients</h2>
+    <br>
+    <div>
+        <table border="1">
+            <tr>
+                <th>No.</th>
+                <th>Id</th>
+                <th>Ingredient</th>
+                <th>Price</th>
+                <!--            <th colspan="2">Operations</th>-->
+                <th>Operations</th>
+            </tr>
+            <tr th:each="ingredient, iStat: ${ingredients}">
+                <td th:text="${iStat.index + 1}"/>
+                <td th:text="${ingredient.id}"/>
+
+                <td th:text="${ingredient.ingredientName}"/>
+                <td th:text="${ingredient.price}"/>
+
+                <!--            <td>-->
+                <!--                <a th:href="@{|ingredient/${ingredient.id}/update|}">Edit</a>-->
+                <!--            </td>-->
+                <td>
+                    <a th:href="@{|/ingredient/${ingredient.id}/delete|}">Remove</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <form action="#" th:action="@{/ingredient/create}" th:object="${ingredient}" method="post">
+            <div class="form-group">
+                <div>
+                    <label for="name">Ingredient</label>
+                </div>
+                <div>
+                    <input type="text" th:field="*{ingredientName}" id="name" placeholder="Ingredient">
+                    <span th:if="${#fields.hasErrors('ingredientName')}" th:errors="*{ingredientName}"></span>
+                </div>
+                <div>
+                    <label for="price">Price</label>
+                </div>
+                <div>
+                    <input type="text" th:field="*{price}" id="price">
+                    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Add Ingredient">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

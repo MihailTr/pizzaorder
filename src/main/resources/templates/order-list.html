@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List of Users</title>
+</head>
+<body>
+<div style="margin: 0 auto; width: max-content">
+    <div th:replace="header"></div>
+    <h2>List of Orders</h2>
+
+    <br>
+    <table class="table" border="1">
+        <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Id</th>
+            <th scope="col">First name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Phone</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Pizza</th>
+            <th scope="col">Pizza size</th>
+            <th scope="col">Pizza price</th>
+            <th scope="col">Ingredients</th>
+            <th scope="col">Order price</th>
+            <th >Operations</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order, iStat: ${allOrders}">
+            <th scope="row" th:text="${iStat.index + 1}"/>
+            <td>
+                <a th:href="@{|/order/${order.id}|}" th:text="${order.id}"/>
+            </td>
+            <td th:text="${order.firstName}"/>
+            <td th:text="${order.address}"/>
+            <td th:text="${order.phone}"/>
+            <td th:text="${order.email}"/>
+            <td th:text="${order.pizza.pizzaName}"/>
+            <td th:text="${order.pizza.size}"/>
+            <td th:text="${order.pizza.price}"/>
+            <td>
+                <div>
+                    <table border="1">
+                        <tr>
+                            <th>No.</th>
+                            <th>Id</th>
+                            <th>Ingredient</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr th:each="ingredient, iStat: ${order.ingredientList}">
+                            <td th:text="${iStat.index + 1}"/>
+                            <td th:text="${ingredient.id}"/>
+                            <td th:text="${ingredient.ingredientName}"/>
+                            <td th:text="${ingredient.price}"/>
+                        </tr>
+                    </table>
+                </div>
+            </td>
+            <td th:text="${order.priceForAll}"/>
+            <td>
+                <a th:href="@{|/order/${order.id}|}">View</a>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
