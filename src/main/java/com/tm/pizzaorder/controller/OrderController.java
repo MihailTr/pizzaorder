@@ -77,7 +77,9 @@ public class OrderController {
     @RequestMapping(value="/order", params={"removeRow"})
     public String removeRow(final Order order, final BindingResult bindingResult, final HttpServletRequest req) {
         final Integer rowId = Integer.valueOf(req.getParameter("removeRow"));
-        order.getIngredientList().remove(rowId.intValue());
+        if (order.getIngredientList().size() != 0) {
+            order.getIngredientList().remove(rowId.intValue());
+        }
         return "order";
     }
 
@@ -87,10 +89,7 @@ public class OrderController {
     }
     @GetMapping("order/{id}")
     public String read(@PathVariable long id, Model model) {
-
         model.addAttribute("order", orderService.readById(id));
         return "order-info";
     }
-
-
 }
