@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Info</title>
+</head>
+<body>
+<div style="margin: 0 auto; width: max-content">
+    <div th:replace="header"></div>
+    <div>
+        <h2>Info about Order</h2>
+        <table class="table">
+            <tr>
+                <td>Id:</td>
+                <td>
+                    <b th:text="${order.id}"></b>
+                </td>
+            </tr>
+            <tr>
+                <td>First name:</td>
+                <td>
+                    <b th:text="${order.firstName}"></b>
+                </td>
+            </tr>
+            <tr>
+                <td>Address:</td>
+                <td>
+                    <b th:text="${order.address}"></b>
+                </td>
+            </tr>
+            <tr>
+                <td>Phone:</td>
+                <td>
+                    <b th:text="${order.phone}"></b>
+                </td>
+            </tr>
+            <tr>
+                <td>E-mail:</td>
+                <td>
+                    <b th:text="${order.email}"></b>
+                </td>
+            </tr>
+            <tr>
+                <td>Pizza:</td>
+                <td>
+                    <b th:text="${order.pizza.pizzaName}"></b>
+                </td>
+            </tr>
+            <tr>
+                <td>Pizza size:</td>
+                <td>
+                    <b th:text="${order.pizza.size}"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Pizza price:</td>
+                <td>
+                    <b th:text="${order.pizza.price}"></b>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Ingredients:</td>
+                <td>
+                    <div>
+                        <table border="1">
+                            <tr>
+                                <th>No.</th>
+                                <th>Id</th>
+                                <th>Ingredient</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr th:each="ingredient, iStat: ${order.ingredientList}">
+                                <td th:text="${iStat.index + 1}"/>
+                                <td th:text="${ingredient.id}"/>
+                                <td th:text="${ingredient.ingredientName}"/>
+                                <td th:text="${ingredient.price}"/>
+                            </tr>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>Order price:</td>
+                <td>
+                    <b th:text="${order.priceForAll}"></b>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>
