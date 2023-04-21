@@ -33,4 +33,5 @@ public class Order {
     private int phone;
     private String email;
     private boolean submit;
+    private String time;
 }
